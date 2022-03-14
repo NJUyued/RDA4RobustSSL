@@ -281,7 +281,7 @@ if __name__ == "__main__":
     Saving & loading of the model.
     '''
     parser.add_argument('--save_dir', type=str, default='./saved_models')
-    parser.add_argument('--save_name', type=str, default='fixmatch')
+    parser.add_argument('--save_name', type=str, default='bda')
     parser.add_argument('--resume', action='store_true')
     parser.add_argument('--load_path', type=str, default=None)
     parser.add_argument('--overwrite', action='store_true')
