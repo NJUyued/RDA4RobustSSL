@@ -81,3 +81,8 @@ python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 > With gamma_l=10, result of seed 1 (Acc/%): 87.21
 ## Resume Training and Evaluation
 If you restart the training, please use `--resume --load_path @your_path`. Each time you start training, the evaluation results of the current model will be displayed. If you want to evaluate a model, use its checkpoints to resume training.
+
+## Acknowledgement
+Our code is based on open source code: [LeeDoYup/FixMatch-pytorch][1]
+
+[1]: https://github.com/LeeDoYup/FixMatch-pytorch
