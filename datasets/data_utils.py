@@ -81,7 +81,7 @@ def split_ssl_data(dataset, data, target, num_labels, num_classes, save_path, in
         if include_lb_to_ulb:
             return lb_data, lbs, np.concatenate((ulb_data, lb_data), axis=0), np.concatenate((ulb_lbs, lbs), axis=0), None
         else:
-            return lb_data, lbs, data[ulb_idx], target[ulb_idx], ulb_idx    
+            return lb_data, lbs, ulb_data, ulb_lbs, unlabeled_idx    
     elif mismatch=='DARP_reversed' or mismatch=='DARP' and gamma!=0:   
         assert gamma>0  
         data =  data[ulb_idx]
@@ -98,7 +98,7 @@ def split_ssl_data(dataset, data, target, num_labels, num_classes, save_path, in
         if include_lb_to_ulb:
             return lb_data, lbs, np.concatenate((ulb_data, lb_data), axis=0), np.concatenate((ulb_lbs, lbs), axis=0), None
         else:
-            return lb_data, lbs, data[ulb_idx], target[ulb_idx], ulb_idx
+            return lb_data, lbs, ulb_data, ulb_lbs, unlabeled_idx
     else:
         target_t = target[ulb_idx] if noisy=='none' else target
         for c in range(num_classes):
