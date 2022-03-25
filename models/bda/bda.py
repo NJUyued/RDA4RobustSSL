@@ -167,7 +167,6 @@ class BDA:
 
                 # for A
                 feature, logits_reverse, predict_prob = cls_reverse.forward(feature)
-                logits_x_lb_reverse = logits_reverse[:num_lb]
                 logits_x_ulb_w_reverse, logits_x_ulb_s_reverse = logits_reverse[num_lb:].chunk(2)
 
                 feature_separate, logits_reverse_separate, predict_prob_separate = cls_reverse.forward(feature[:num_lb])
@@ -279,7 +278,6 @@ class BDA:
         
         total_loss = 0.0
         total_acc = 0.0
-        total_acc_fix = 0.0
         total_num = 0.0
         for x, y in eval_loader:
             y = y.long()
@@ -291,16 +289,10 @@ class BDA:
             logits, feature = feature_extractor.forward(x, ood_test=True)         
             max_probs, max_idx = torch.max(torch.softmax(logits, dim=-1), dim=-1)
 
-            feature, logits_reverse, predict_prob = cls_reverse.forward(feature)
-            pseudo_label_reverse = torch.softmax(logits_reverse, dim=-1)
-            min_probs_reverse, min_idx_reverse = torch.min(pseudo_label_reverse, dim=-1)
-
             loss = F.cross_entropy(logits, y, reduction='mean')
-            acc = torch.sum(max_idx == y)
-            acc_fix = torch.sum(min_idx_reverse == y)         
+            acc = torch.sum(max_idx == y)       
             total_loss += loss.detach()*num_batch
-            total_acc += acc.detach()
-            total_acc_fix += acc_fix.detach()         
+            total_acc += acc.detach()      
 
         if not use_ema:
             eval_model.train()         
@@ -327,14 +319,13 @@ class BDA:
 
             feature, logits_reverse, predict_prob = cls_reverse.forward(feature)
             pseudo_label_reverse = torch.softmax(logits_reverse, dim=-1)
-            max_probs_reverse, max_idx_reverse = torch.max(pseudo_label_reverse, dim=-1)
-            min_probs_reverse, min_idx_reverse = torch.min(pseudo_label_reverse, dim=-1)
+
             maskindex_total = np.where(mask.cpu()==1)[0]
             
             acc_p_r += pseudo_label_reverse.cpu().max(1)[1].eq(target).sum().cpu().numpy()
             acc_p += pseudo_label.cpu().max(1)[1].eq(target).sum().cpu().numpy()              
              
-            totalnum += max_probs_reverse.numel()
+            totalnum += max_probs.numel()
             totalnum_p += len(maskindex_total)
 
         pseudo_label_acc=acc_p/totalnum
@@ -343,7 +334,6 @@ class BDA:
             self.highest_pseduo_acc = pseudo_label_acc
 
         return {'eval/loss': total_loss/total_num, 'eval/top-1-acc': total_acc/total_num , 
-                'eval/top-1-acc(argmin->A)': total_acc_fix/total_num ,
                 'ulb/pseudo_label_acc':pseudo_label_acc,
                 'ulb/complementary_pseudo_label_acc':1-(acc_p_r/totalnum),
                 'ulb/highest_pseduo_acc':self.highest_pseduo_acc,
