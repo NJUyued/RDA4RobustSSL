@@ -18,8 +18,6 @@ from models.bda.bda import BDA
 from datasets.ssl_dataset import SSL_Dataset
 from datasets.data_utils import get_data_loader
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0,6' 
-
 def main(args):
     '''
     For (Distributed)DataParallelism,
@@ -331,7 +329,7 @@ if __name__ == "__main__":
     Data Configurations
     '''
     
-    parser.add_argument('--data_dir', type=str, default='../MutexMatch/data')
+    parser.add_argument('--data_dir', type=str, default='./data')
     parser.add_argument('--dataset', type=str, default='cifar10')
     parser.add_argument('--train_sampler', type=str, default='RandomSampler')
     parser.add_argument('--num_classes', type=int, default=10)
@@ -340,8 +338,8 @@ if __name__ == "__main__":
     parser.add_argument('--noisy', type=str, default='none', help='type of noisy labels')
     parser.add_argument('--noisy_ratio', type=int, default=0, help='ratio of noisy labels')
     parser.add_argument('--mismatch', type=str, default='none', help='type of mismatched dist')
-    parser.add_argument('--n0', type=int, default=0, help='for MANR')
-    parser.add_argument('--gamma', type=int, default=0, help='for MANR')
+    parser.add_argument('--n0', type=int, default=0, help='imbalanced ratio for labeled data')
+    parser.add_argument('--gamma', type=int, default=0, help='imbalanced ratio for unlabeled data')
     
     '''
     multi-GPUs & Distrbitued Training

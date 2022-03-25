@@ -48,7 +48,7 @@ def split_ssl_data(dataset, data, target, num_labels, num_classes, save_path, in
         include_lb_to_ulb: If True, labeled data is also included in unlabeld data
     """
     data, target = np.array(data), np.array(target)
-    lb_data, lbs, lb_idx = sample_labeled_data(data, target, num_labels, num_classes, save_path, index, noisy, noisy_ratio, mismatch, n0, gamma, dataset)
+    lb_data, lbs, lb_idx, distri_lb = sample_labeled_data(data, target, num_labels, num_classes, save_path, index, noisy, noisy_ratio, mismatch, n0, gamma, dataset)
     ulb_idx = np.array(sorted(list(set(range(len(data))) - set(lb_idx)))) #unlabeled_data index of data
     ulb_data = []
     ulb_lbs = []
@@ -103,9 +103,7 @@ def split_ssl_data(dataset, data, target, num_labels, num_classes, save_path, in
         target_t = target[ulb_idx] if noisy=='none' else target
         for c in range(num_classes):
             idx = np.where(target == c)[0]
-            idx_t = np.where(target_t == c)[0]
-            
-            samply_dist_u.append(len(idx_t))
+            samply_dist_u.append(len(idx)-distri_lb[c])
         # save dist&index
         write_dis_idx(file_path_dist=file_path_dist, mode='ulb', dis=samply_dist_u, idx=ulb_idx)
 
@@ -210,7 +208,7 @@ def sample_labeled_data(data, target,
                     temp_lb[idx_noisy[i]] = ays_map[c]
             lb_data.extend(data[idx])
             lbs.extend(temp_lb)
-    return np.array(lb_data), np.array(lbs), np.array(lb_idx)
+    return np.array(lb_data), np.array(lbs), np.array(lb_idx), np.array(distri_lb)
 
 
 def get_sampler_by_name(name):
