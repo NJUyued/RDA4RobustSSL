@@ -1,5 +1,5 @@
 # BDA4RobustSSL
-Codes for ECCV Submission (ID: 3058).
+Code for ECCV Submission (ID: 3058).
 ## Requirements
 - matplotlib==3.3.2
 - numpy==1.19.2
