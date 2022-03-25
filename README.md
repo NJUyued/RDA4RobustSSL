@@ -82,6 +82,39 @@ python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 ## Resume Training and Evaluation
 If you restart the training, please use `--resume --load_path @your_path`. Each time you start training, the evaluation results of the current model will be displayed. If you want to evaluate a model, use its checkpoints to resume training.
 
+## Results (seed=1)
+
+| Dateset | Labels | N_0 |gamma|Acc|
+| :-----:| :----: | :----: |:----: |:----: |
+|CIFAR-10 | 20 | - |- |93.40 |
+| | 40 | - |- |94.13 |
+| | 80 | - |- |94.24 |
+| | 100 | - |- |94.66 |
+| | 40 | 10 |- |93.06 |
+|  | 40 | 20 |- |81.51 |
+|  | 100 | 40 |- |94.42 |
+|  | 100 | 80 |- |78..99 |
+|  | 40 | 10 |2 |81.60 |
+|  | 40 | 10 |5 |80.68 |
+|  | 100 | 40 |5 |79.54 |
+|  | 40 | - |100 |47.68 |
+|  | 40 | - |200 |45.57 |
+|  | DARP | 100 |1 |93.11 |
+|  | DARP | 100 |50 |79.84 |
+|  | DARP | 100 |150 |74.71 |
+|  | DARP (reversed) | 100 |100 |78.53 |
+|CIFAR-100  | 400 | 40 |- |33.54 |
+|  | 1000 | 80 |- |42.87 |
+|STL-10 | 1000| - |- |82.53 |
+| | DARP| 10 |- |87.21 |
+| | DARP| 20 |- |83.71 |
+|mini-ImageNet | 1000| -|- |47.73 |
+| | 1000| 40 |- |43.59 |
+| | 1000| 80 |- |38.16 |
+| | 1000| 40 |10 |25.91 |
+| | 1000| 40 |10 |25.91 |
+
+
 ## Acknowledgement
 Our code is based on open source code: [LeeDoYup/FixMatch-pytorch][1]
 
