@@ -14,7 +14,7 @@ Codes for ECCV Submission (ID: 3058).
 - `--n0` When `--mismatch bda`, this arg means the imbalanced ratio N_0 for labeled data; When `--mismatch DARP/DARP_reversed`, this arg means the imbalanced ratio gamma_l for labeled data.
 - `--gamma` When `--mismatch bda`, this arg means the imbalanced ratio gamma for unlabeled data; When `--mismatch DARP/DARP_reversed`, this arg means the imbalanced ratio gamma_u for unlabeled data. 
 - `--net_from_name` and `--net` By default, wide resnet (WRN-28-2) are used for experiments. If you want to use other backbones for tarining, set `--net_from_name True --net @backbone`. We provide alternatives as follows: resnet18, cnn13 and preresnet.
-- `--dataset` and `--data` Your dataset name and path. We support four datasets: CIFAR-10, CIFAR-100, STL-10 and mini-ImageNet. When `--dataset stl10`, set `--fold [0/1/2/3/4].`
+- `--dataset [cifar10/cifar100/stl10/miniimage]` and `--data_dir` Your dataset name and path. We support four datasets: CIFAR-10, CIFAR-100, STL-10 and mini-ImageNet. When `--dataset stl10`, set `--fold [0/1/2/3/4].`
 - `--num_eval_iter` After how many iterations, we evaluate the model. **Note that although we show the accuracy of pseudo-labels on unlabeled data in the evaluation, this is only to show the training process. We did not use any information about labels for unlabeled data in the training. Additionally, when you train model on STL-10, the pseudo-label accuracy will not be displayed normally, because we don't have ground-truth of unlabeled data.**
 ### Training with Single GPU
 All models in this paper are trained on a single GPU.
