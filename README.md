@@ -7,7 +7,7 @@ Code for ECCV Submission (ID: 3058).
 - Pillow==9.0.1
 - torch==1.4.0+cu92
 - torchvision==0.5.0+cu92
-## Train
+## How to Train
 ### Important Args
 - `--num_labels` Amount of labeled data used.  
 - `--mismatch` Select the type of mismatched distribution dataset. `bda` means our protocol for constructing mismatched distribution dataset, which is described in Sec. 4.2; `DARP` means DARP's protocol described in Sec. C.1 of Supplementary Materials; `DARP_reversed` means DARP's protocol for CIFAR-10 with reversed version of mismatched distribution.
@@ -74,7 +74,7 @@ python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 ```
 > With gamma_l=100, gamma_u=100 (reversed), result of seed 1 (Acc/%): 78.53
 
-For STL-10, set `--fold -1`
+For STL-10 in DARP's protocol, set `--fold -1`
 ```
 python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset stl10 --num_classes 10 --mismatch DARP --n0 10 --gpu 0 --fold -1
 ```
@@ -82,7 +82,7 @@ python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 ## Resume Training and Evaluation
 If you restart the training, please use `--resume --load_path @your_path`. Each time you start training, the evaluation results of the current model will be displayed. If you want to evaluate a model, use its checkpoints to resume training.
 
-## Results (seed=1)
+## Results (e.g. seed=1)
 
 | Dateset | Labels | N_0 |gamma|Acc|
 | :-----:| :----: | :----: |:----: |:----: |
