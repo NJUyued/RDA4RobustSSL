@@ -39,7 +39,7 @@ By default, the model and `dist&index.txt` will be saved in `\saved_models\@--sa
 python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --num_labels 20  --gpu 0
 ```
 
-> With 20labels, result of seed 1 (Acc/%): 92.15
+> With 20labels, result of seed 1 (Acc/%): 93.40, weight: [here][cifar10-20]
 
 ***
 #### Mismatched Distribution
@@ -149,6 +149,7 @@ If you restart the training, please use `--resume --load_path @your_path`. Each 
 Our code is based on open source code: [LeeDoYup/FixMatch-pytorch][1]
 
 [1]: https://github.com/LeeDoYup/FixMatch-pytorch
+[cifar10-20]: https://1drv.ms/u/s!Ao848hI985sshjSqXrH4QoG1JgCH?e=qiGZe3
 [cifar10-40-10]: https://1drv.ms/u/s!Ao848hI985sshiRA2Wm2F0IuG_hv?e=jh2sOg
 [cifar10-40-10-5]: https://1drv.ms/u/s!Ao848hI985sshiZTF8hAq51b01n1?e=OTPuMd
 [cifar10-40-1-200]: https://1drv.ms/u/s!Ao848hI985sshij5UqKI2EkVHMOH?e=g1Nq6V
@@ -157,3 +158,4 @@ Our code is based on open source code: [LeeDoYup/FixMatch-pytorch][1]
 [stl10-darp]: https://1drv.ms/u/s!Ao848hI985sshi60K-vEDA96Rcxp?e=U3uhGx
 [mini-1000-40]: https://1drv.ms/u/s!Ao848hI985sshjBEV0ckYmz7vR_T?e=325Lz8
 [cifar100-400-40]: https://1drv.ms/u/s!Ao848hI985sshjIKeeut6rM_NuVW?e=9c9JiB
+[cifar10-20]: https://1drv.ms/u/s!Ao848hI985sshjSqXrH4QoG1JgCH?e=qiGZe3
