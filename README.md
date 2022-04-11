@@ -14,7 +14,7 @@ Code for ECCV Submission (ID: 3058).
 - `--n0` : When `--mismatch bda`, this arg means the imbalanced ratio N_0 for labeled data; When `--mismatch DARP/DARP_reversed`, this arg means the imbalanced ratio gamma_l for labeled data.
 - `--gamma` : When `--mismatch bda`, this arg means the imbalanced ratio gamma for unlabeled data; When `--mismatch DARP/DARP_reversed`, this arg means the imbalanced ratio gamma_u for unlabeled data. 
 - `--net_from_name` and `--net` : By default, wide resnet (WRN-28-2) are used for experiments. If you want to use other backbones for tarining, set `--net_from_name True --net @backbone`. We provide alternatives as follows: resnet18, cnn13 and preresnet.
-- `--dataset [cifar10/cifar100/stl10/miniimage]` and `--data_dir`  :Your dataset name and path. We support four datasets: CIFAR-10, CIFAR-100, STL-10 and mini-ImageNet. When `--dataset stl10`, set `--fold [0/1/2/3/4].`
+- `--dataset [cifar10/cifar100/stl10/miniimage]` and `--data_dir`  : Your dataset name and path. We support four datasets: CIFAR-10, CIFAR-100, STL-10 and mini-ImageNet. When `--dataset stl10`, set `--fold [0/1/2/3/4].`
 - `--num_eval_iter` : After how many iterations, we evaluate the model. Note that although we show the accuracy of pseudo-labels on unlabeled data in the evaluation, this is only to show the training process. We did not use any information about labels for unlabeled data in the training. Additionally, when you train model on STL-10, the pseudo-label accuracy will not be displayed normally, because we don't have ground-truth of unlabeled data.
 ### Training with Single GPU
 All models in this paper are trained on a single GPU.
@@ -52,32 +52,32 @@ python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 - Imbalanced and mismatched C_x, C_u for Tab. 3 in Sec. 5.2
 
 ```
+## CIFAR-10
 python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --num_labels 40 --mismatch bda --n0 10 --gamma 5 --gpu 0
 ```
-> With 40 labels, N0=10, gamma=5, result of seed 1 (Acc/%): 80.68
+> With 40 labels, N0=10, gamma=5, result of seed 1 (Acc/%): 80.68, weight: [here][cifar10-40-10-5]
 - Balanced C_x and imbalanced C_u for Tab. 5 in Sec. 5.2
 
 ```
 python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --num_labels 40 --mismatch bda --gamma 200 --gpu 0
 ```
-> With 40 labels, gamma=200, result of seed 1 (Acc/%): 45.57
+> With 40 labels, gamma=200, result of seed 1 (Acc/%): 45.57, weight: [here][cifar10-40-1-200]
 - DARP's protocol for Tab. 5 in Sec. 5.2.
 
-For CIFAR-10
 ```
+## CIFAR-10
 python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --mismatch DARP --n0 100 --gamma 1 --gpu 0
 ```
-> With gamma_l=100, gamma_u=1, result of seed 1 (Acc/%): 93.11
-
-For CIFAR-10 (reversed)
+> With gamma_l=100, gamma_u=1, result of seed 1 (Acc/%): 93.11, weight: [here][cifar10-darp-1]
 
 ```
+## CIFAR-10 (reversed)
 python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --mismatch DARP_reversed --n0 100 --gamma 100 --gpu 0
 ```
-> With gamma_l=100, gamma_u=100 (reversed), result of seed 1 (Acc/%): 78.53
+> With gamma_l=100, gamma_u=100 (reversed), result of seed 1 (Acc/%): 78.53, weight: [here][cifar10-darp-re]
 
-For STL-10 in DARP's protocol, set `--fold -1`
 ```
+## For STL-10 in DARP's protocol, set --fold -1
 python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset stl10 --num_classes 10 --mismatch DARP --n0 10 --gpu 0 --fold -1
 ```
 > With gamma_l=10, result of seed 1 (Acc/%): 87.21
@@ -122,3 +122,8 @@ Our code is based on open source code: [LeeDoYup/FixMatch-pytorch][1]
 
 [1]: https://github.com/LeeDoYup/FixMatch-pytorch
 [cifar10-40-10]: https://1drv.ms/u/s!Ao848hI985sshiRA2Wm2F0IuG_hv?e=jh2sOg
+[cifar10-40-10-5]: https://1drv.ms/u/s!Ao848hI985sshiZTF8hAq51b01n1?e=OTPuMd
+[cifar10-40-1-200]: https://1drv.ms/u/s!Ao848hI985sshij5UqKI2EkVHMOH?e=g1Nq6V
+[cifar10-darp-1]: https://1drv.ms/u/s!Ao848hI985sshiqUhVPxBklQnKM0?e=vCs0HU
+[cifar10-darp-re]: https://1drv.ms/u/s!Ao848hI985sshizWFgWZj6JwYgZ6?e=dIPbnN
+[stl10-darp]: https://1drv.ms/u/s!Ao848hI985sshi60K-vEDA96Rcxp?e=U3uhGx
