@@ -78,9 +78,9 @@ python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 
 ```
 ## For STL-10 in DARP's protocol, set --fold -1
-python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset stl10 --num_classes 10 --mismatch DARP --n0 10 --gpu 0 --fold -1
+python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset stl10 --num_classes 10 --mismatch DARP --n0 10 --gpu 0 --fold -1 
 ```
-> With gamma_l=10, result of seed 1 (Acc/%): 87.21
+> With gamma_l=10, result of seed 1 (Acc/%): 87.21, weight: [here][stl10-darp]
 ## Resume Training and Evaluation
 If you restart the training, please use `--resume --load_path @your_path`. Each time you start training, the evaluation results of the current model will be displayed. If you want to evaluate a model, use its checkpoints to resume training.
 
