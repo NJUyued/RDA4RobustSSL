@@ -31,7 +31,6 @@ python train_bda.py --world-size 1 --rank 0 --multiprocessing-distributed @@@oth
 ### Examples of Running
 By default, the model and `dist&index.txt` will be saved in `\saved_models\@--save_name (yours)`. The file `dist&index.txt` will display   detailed settings of mismatched distribution. This code assumes 1 epoch of training, but the number of iterations is 2\*\*20. For CIFAR-100, you need set `--widen_factor 8` for WRN-28-8 whereas WRN-28-2 is used for CIFAR-10.  Note that you need set `--net_from_name True --net resnet18` for STL-10 and mini-ImageNet. Additionally, WRN-28-2 is used for all experiments under DARP's protocol.
 
-Let's mainly take Cifar-10 as examples.
 #### Conventional Setting 
 - Matched and balanced C_x, C_u for Tab. 1 in Sec. 5.1
 
@@ -49,6 +48,19 @@ python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --num_labels 40 --mismatch bda --n0 10 --gpu 0
 ```
 > With 40 labels, N0=10, result of seed 1 (Acc/%): 93.06, weight: [here][cifar10-40-10]
+
+```
+## CIFAR-100
+python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar100 --dataset cifar100 --num_classes 100 --num_labels 400 --mismatch bda --n0 40 --gpu 0 --widen_factor 8
+```
+> With 400 labels, N0=40, result of seed 1 (Acc/%): -
+
+```
+## mini-ImageNet
+python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name miniimage --dataset miniimage --num_classes 100 --num_labels 1000 --mismatch bda --n0 40 --gpu 0 --net_from_name True --net resnet18 
+```
+> With 1000 labels, N0=40, result of seed 1 (Acc/%): 43.59
+
 - Imbalanced and mismatched C_x, C_u for Tab. 3 in Sec. 5.2
 
 ```
@@ -78,7 +90,7 @@ python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 
 ```
 ## For STL-10 in DARP's protocol, set --fold -1
-python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset stl10 --num_classes 10 --mismatch DARP --n0 10 --gpu 0 --fold -1 
+python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name stl10 --dataset stl10 --num_classes 10 --mismatch DARP --n0 10 --gpu 0 --fold -1 
 ```
 > With gamma_l=10, result of seed 1 (Acc/%): 87.21, weight: [here][stl10-darp]
 ## Resume Training and Evaluation
