@@ -40,6 +40,8 @@ python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 ```
 
 > With 20labels, result of seed 1 (Acc/%): 92.15
+
+***
 #### Mismatched Distribution
 - Imbalanced C_x and balanced C_u for Tab. 2 in Sec. 5.2
 
@@ -49,17 +51,23 @@ python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 ```
 > With 40 labels, N0=10, result of seed 1 (Acc/%): 93.06, weight: [here][cifar10-40-10]
 
+***
+
 ```
 ## CIFAR-100
 python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar100 --dataset cifar100 --num_classes 100 --num_labels 400 --mismatch bda --n0 40 --gpu 0 --widen_factor 8
 ```
-> With 400 labels, N0=40, result of seed 1 (Acc/%): -
+> With 400 labels, N0=40, result of seed 1 (Acc/%): 33.54, weight: [here][cifar100-400-40]
+
+***
 
 ```
 ## mini-ImageNet
 python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name miniimage --dataset miniimage --num_classes 100 --num_labels 1000 --mismatch bda --n0 40 --gpu 0 --net_from_name True --net resnet18 
 ```
-> With 1000 labels, N0=40, result of seed 1 (Acc/%): 43.59
+> With 1000 labels, N0=40, result of seed 1 (Acc/%): 43.59, weight: [here][mini-1000-40]
+
+***
 
 - Imbalanced and mismatched C_x, C_u for Tab. 3 in Sec. 5.2
 
@@ -68,12 +76,16 @@ python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --num_labels 40 --mismatch bda --n0 10 --gamma 5 --gpu 0
 ```
 > With 40 labels, N0=10, gamma=5, result of seed 1 (Acc/%): 80.68, weight: [here][cifar10-40-10-5]
+
+***
 - Balanced C_x and imbalanced C_u for Tab. 5 in Sec. 5.2
 
 ```
 python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --num_labels 40 --mismatch bda --gamma 200 --gpu 0
 ```
 > With 40 labels, gamma=200, result of seed 1 (Acc/%): 45.57, weight: [here][cifar10-40-1-200]
+
+***
 - DARP's protocol for Tab. 5 in Sec. 5.2.
 
 ```
@@ -82,11 +94,15 @@ python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 ```
 > With gamma_l=100, gamma_u=1, result of seed 1 (Acc/%): 93.11, weight: [here][cifar10-darp-1]
 
+***
+
 ```
 ## CIFAR-10 (reversed)
 python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --mismatch DARP_reversed --n0 100 --gamma 100 --gpu 0
 ```
 > With gamma_l=100, gamma_u=100 (reversed), result of seed 1 (Acc/%): 78.53, weight: [here][cifar10-darp-re]
+
+***
 
 ```
 ## For STL-10 in DARP's protocol, set --fold -1
@@ -139,3 +155,5 @@ Our code is based on open source code: [LeeDoYup/FixMatch-pytorch][1]
 [cifar10-darp-1]: https://1drv.ms/u/s!Ao848hI985sshiqUhVPxBklQnKM0?e=vCs0HU
 [cifar10-darp-re]: https://1drv.ms/u/s!Ao848hI985sshizWFgWZj6JwYgZ6?e=dIPbnN
 [stl10-darp]: https://1drv.ms/u/s!Ao848hI985sshi60K-vEDA96Rcxp?e=U3uhGx
+[mini-1000-40]: https://1drv.ms/u/s!Ao848hI985sshjBEV0ckYmz7vR_T?e=325Lz8
+[cifar100-400-40]: https://1drv.ms/u/s!Ao848hI985sshjIKeeut6rM_NuVW?e=9c9JiB
