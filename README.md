@@ -154,7 +154,7 @@ Our code is based on open source code: [LeeDoYup/FixMatch-pytorch][1]
 [cifar10-40-1-200]: https://1drv.ms/u/s!Ao848hI985sshij5UqKI2EkVHMOH?e=g1Nq6V
 [cifar10-darp-1]: https://1drv.ms/u/s!Ao848hI985sshiqUhVPxBklQnKM0?e=vCs0HU
 [cifar10-darp-re]: https://1drv.ms/u/s!Ao848hI985sshizWFgWZj6JwYgZ6?e=dIPbnN
-[stl10-darp]: https://1drv.ms/u/s!Ao848hI985sshi60K-vEDA96Rcxp?e=U3uhGx
+[stl10-darp]: https://1drv.ms/u/s!Ao848hI985sshjXJHqsWy5r68Y9V?e=J4zoOd
 [mini-1000-40]: https://1drv.ms/u/s!Ao848hI985sshjBEV0ckYmz7vR_T?e=325Lz8
 [cifar100-400-40]: https://1drv.ms/u/s!Ao848hI985sshjIKeeut6rM_NuVW?e=9c9JiB
 [cifar10-20]: https://1drv.ms/u/s!Ao848hI985sshjSqXrH4QoG1JgCH?e=qiGZe3
