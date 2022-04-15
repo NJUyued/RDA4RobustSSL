@@ -180,7 +180,7 @@ class SSL_Dataset:
             num_classes = self.num_classes
             transform = self.transform
             distri_lb = []
-            if self.mismatch=='DARP':
+            if self.mismatch=='darp':
                 lb_idx = []
                 lb_data = []
                 lbs = []
