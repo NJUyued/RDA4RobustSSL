@@ -10,7 +10,7 @@ Code for ECCV Submission (ID: 3058).
 ## How to Train
 ### Important Args
 - `--num_labels` : Amount of labeled data used.  
-- `--mismatch` : Select the type of mismatched distribution dataset. `bda` means our protocol for constructing mismatched distribution dataset, which is described in Sec. 4.2; `DARP` means DARP's protocol described in Sec. C.1 of Supplementary Materials; `DARP_reversed` means DARP's protocol for CIFAR-10 with reversed version of mismatched distribution.
+- `--mismatch [bda/DARP/DARP_reversed]` : Select the type of mismatched distribution dataset. `bda` means our protocol for constructing mismatched distribution dataset, which is described in Sec. 4.2; `DARP` means DARP's protocol described in Sec. C.1 of Supplementary Materials; `DARP_reversed` means DARP's protocol for CIFAR-10 with reversed version of mismatched distribution.
 - `--n0` : When `--mismatch bda`, this arg means the imbalanced ratio N_0 for labeled data; When `--mismatch DARP/DARP_reversed`, this arg means the imbalanced ratio gamma_l for labeled data.
 - `--gamma` : When `--mismatch bda`, this arg means the imbalanced ratio gamma for unlabeled data; When `--mismatch DARP/DARP_reversed`, this arg means the imbalanced ratio gamma_u for unlabeled data. 
 - `--net_from_name` and `--net` : By default, wide resnet (WRN-28-2) are used for experiments. If you want to use other backbones for tarining, set `--net_from_name True --net @backbone`. We provide alternatives as follows: resnet18, cnn13 and preresnet.
@@ -80,6 +80,7 @@ python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 - Balanced C_x and imbalanced C_u for Tab. 5 in Sec. 5.2
 
 ```
+## CIFAR-10
 python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --num_labels 40 --mismatch bda --gamma 200 --gpu 0
 ```
 > CIFAR-10 with 40 labels, gamma=200, result of seed 1 (Acc/%): 45.57, weight: [here][cifar10-40-1-200]
