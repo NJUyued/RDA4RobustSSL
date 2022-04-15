@@ -82,13 +82,13 @@ def split_ssl_data(dataset, data, target, num_labels, num_classes, save_path, in
             return lb_data, lbs, np.concatenate((ulb_data, lb_data), axis=0), np.concatenate((ulb_lbs, lbs), axis=0), None
         else:
             return lb_data, lbs, ulb_data, ulb_lbs, unlabeled_idx    
-    elif mismatch=='DARP_reversed' or mismatch=='DARP' and gamma!=0:   
+    elif mismatch=='darp_reversed' or mismatch=='darp' and gamma!=0:   
         assert gamma>0  
         data =  data[ulb_idx]
         target =  target[ulb_idx]
         for c in range(num_classes):
             idx = np.where(target == c)[0]
-            lt_len = math.ceil(dic_darp[dataset] * math.pow(gamma,-((nc-c)/nc))) if mismatch=='DARP_reversed' else math.ceil(dic_darp[dataset] * math.pow(gamma,-(c/nc)))
+            lt_len = math.ceil(dic_darp[dataset] * math.pow(gamma,-((nc-c)/nc))) if mismatch=='darp_reversed' else math.ceil(dic_darp[dataset] * math.pow(gamma,-(c/nc)))
             idx = np.random.choice(idx, lt_len, False) 
             ulb_data.extend(data[idx])
             ulb_lbs.extend(target[idx]) 
@@ -140,7 +140,7 @@ def sample_labeled_data(data, target,
     distri_lb = []
     nc = num_classes-1
     if noisy_ratio==0:
-        if mismatch=='DARP' or mismatch=='DARP_reversed':
+        if mismatch=='darp' or mismatch=='darp_reversed':
             dic = {'cifar10':1500,'cifar100':150,'stl10':450}
             for c in range(num_classes):
                 idx = np.where(target == c)[0]            
