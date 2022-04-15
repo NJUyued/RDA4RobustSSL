@@ -10,7 +10,7 @@ Code for ECCV Submission (ID: 3058).
 ## How to Train
 ### Important Args
 - `--num_labels` : Amount of labeled data used.  
-- `--mismatch [bda/DARP/DARP_reversed]` : Select the type of mismatched distribution dataset. `bda` means our protocol for constructing mismatched distribution dataset, which is described in Sec. 4.2; `DARP` means DARP's protocol described in Sec. C.1 of Supplementary Materials; `DARP_reversed` means DARP's protocol for CIFAR-10 with reversed version of mismatched distribution.
+- `--mismatch [bda/darp/darp_reversed]` : Select the type of mismatched distribution dataset. `bda` means our protocol for constructing mismatched distribution dataset, which is described in Sec. 4.2; `DARP` means DARP's protocol described in Sec. C.1 of Supplementary Materials; `DARP_reversed` means DARP's protocol for CIFAR-10 with reversed version of mismatched distribution.
 - `--n0` : When `--mismatch bda`, this arg means the imbalanced ratio N_0 for labeled data; When `--mismatch DARP/DARP_reversed`, this arg means the imbalanced ratio gamma_l for labeled data.
 - `--gamma` : When `--mismatch bda`, this arg means the imbalanced ratio gamma for unlabeled data; When `--mismatch DARP/DARP_reversed`, this arg means the imbalanced ratio gamma_u for unlabeled data. 
 - `--net_from_name` and `--net` : By default, wide resnet (WRN-28-2) are used for experiments. If you want to use other backbones for tarining, set `--net_from_name True --net @backbone`. We provide alternatives as follows: resnet18, cnn13 and preresnet.
@@ -90,7 +90,7 @@ python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 
 ```
 ## CIFAR-10
-python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --mismatch DARP --n0 100 --gamma 1 --gpu 0
+python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --mismatch darp --n0 100 --gamma 1 --gpu 0
 ```
 > CIFAR-10 with gamma_l=100, gamma_u=1, result of seed 1 (Acc/%): 93.11, weight: [here][cifar10-darp-1]
 
@@ -98,7 +98,7 @@ python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 
 ```
 ## CIFAR-10 (reversed)
-python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --mismatch DARP_reversed --n0 100 --gamma 100 --gpu 0
+python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --mismatch darp_reversed --n0 100 --gamma 100 --gpu 0
 ```
 > CIFAR-10 with gamma_l=100, gamma_u=100 (reversed), result of seed 1 (Acc/%): 78.53, weight: [here][cifar10-darp-re]
 
@@ -106,9 +106,11 @@ python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 
 ```
 ## For STL-10 in DARP's protocol, set --fold -1
-python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name stl10 --dataset stl10 --num_classes 10 --mismatch DARP --n0 10 --gpu 0 --fold -1 
+python train_bda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name stl10 --dataset stl10 --num_classes 10 --mismatch darp --n0 10 --gpu 0 --fold -1 
 ```
 > STL-10 with gamma_l=10, result of seed 1 (Acc/%): 87.21, weight: [here][stl10-darp]
+
+***
 ## Resume Training and Evaluation
 If you restart the training, please use `--resume --load_path @your_path`. Each time you start training, the evaluation results of the current model will be displayed. If you want to evaluate a model, use its checkpoints to resume training.
 
