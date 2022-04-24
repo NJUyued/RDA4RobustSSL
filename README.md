@@ -118,32 +118,32 @@ If you restart the training, please use `--resume --load_path @your_path`. Each 
 
 | Dateset | Labels | N_0 |gamma|Acc|Note|
 | :-----:| :----: | :----: |:----: |:----: |:----: |
-|CIFAR-10 | 20 | - |- |93.40 |conventional settings|
+|CIFAR-10 | 20 | - |- |93.40 |Conventional settings|
 | | 40 | - |- |94.13 ||
 | | 80 | - |- |94.24 ||
 | | 100 | - |- |94.66 ||
-| | 40 | 10 |- |93.06 |imbalance C_x and balanced C_u|
+| | 40 | 10 |- |93.06 |Imbalanced C_x and balanced C_u|
 |  | 40 | 20 |- |81.51 ||
 |  | 100 | 40 |- |94.42 ||
 |  | 100 | 80 |- |78..99 ||
-|  | 40 | 10 |2 |81.60 |mismatched imbalance C_x and C_u|
+|  | 40 | 10 |2 |81.60 |Mismatched imbalanced C_x and C_u|
 |  | 40 | 10 |5 |80.68 ||
 |  | 100 | 40 |5 |79.54 ||
-|  | 40 | - |100 |47.68 |balance C_x and imbalanced C_u|
+|  | 40 | - |100 |47.68 |Balanced C_x and imbalanced C_u|
 |  | 40 | - |200 |45.57 ||
 |  | DARP | 100 |1 |93.11 |DARP's protocol|
 |  | DARP | 100 |50 |79.84 ||
 |  | DARP | 100 |150 |74.71 ||
 |  | DARP (reversed) | 100 |100 |78.53 ||
-|CIFAR-100  | 400 | 40 |- |33.54 |imbalance C_x and balanced C_u|
+|CIFAR-100  | 400 | 40 |- |33.54 |Imbalanced C_x and balanced C_u|
 |  | 1000 | 80 |- |42.87 ||
-|STL-10 | 1000| - |- |82.53 |conventional settings|
+|STL-10 | 1000| - |- |82.53 |Conventional settings|
 | | DARP| 10 |- |87.21 |DARP's protocol|
 | | DARP| 20 |- |83.71 ||
-|mini-ImageNet | 1000| -|- |47.73 |conventional settings|
-| | 1000| 40 |- |43.59 |imbalance C_x and balanced C_u|
+|mini-ImageNet | 1000| -|- |47.73 |Conventional settings|
+| | 1000| 40 |- |43.59 |Imbalanced C_x and balanced C_u|
 | | 1000| 80 |- |38.16 ||
-| | 1000| 40 |10 |25.91 |mismatched imbalance C_x and C_u|
+| | 1000| 40 |10 |25.91 |Mismatched imbalanced C_x and C_u|
 
 
 
