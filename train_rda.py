@@ -14,7 +14,7 @@ import torch.multiprocessing as mp
 
 from utils import net_builder, get_logger, count_parameters
 from train_utils import TBLog, get_SGD, get_cosine_schedule_with_warmup, get_nodecay_schedule
-from models.bda.bda import BDA
+from models.rda.rda import RDA
 from datasets.ssl_dataset import SSL_Dataset
 from datasets.data_utils import get_data_loader
 
@@ -112,7 +112,7 @@ def main_worker(gpu, ngpus_per_node, args):
                                 'bn_momentum': args.bn_momentum,
                                 'dropRate': args.dropout})
     
-    model = BDA(_net_builder,
+    model = RDA(_net_builder,
                      args.num_classes,
                      args.ema_m,
                      args.T,
@@ -134,7 +134,7 @@ def main_worker(gpu, ngpus_per_node, args):
                                                 num_warmup_steps=args.num_train_iter*0)
     else:
         scheduler = get_nodecay_schedule(optimizer)
-    ## set SGD and cosine lr on BDA 
+    ## set SGD and cosine lr on RDA 
     model.set_optimizer(optimizer, scheduler)
     
     
@@ -179,7 +179,7 @@ def main_worker(gpu, ngpus_per_node, args):
     loader_dict = {}
     if args.dataset=='miniimage':
         from datasets_mini.miniimage import get_train_loader, get_val_loader
-        if args.mismatch == 'bda' and args.gamma==0:
+        if args.mismatch == 'rda' and args.gamma==0:
             flag_mismatch = True
         else:
             flag_mismatch = False
@@ -251,14 +251,14 @@ def main_worker(gpu, ngpus_per_node, args):
                                                     args.eval_batch_size,                                                                              
                                                     num_workers=args.num_workers)
     
-    ## set DataLoader on BDA
+    ## set DataLoader on RDA
     model.set_data_loader(loader_dict)
     
     #If args.resume, load checkpoints from args.load_path
     if args.resume:
         model.load_model(args.load_path)
     
-    # START TRAINING of BDA
+    # START TRAINING of RDA
     trainer = model.train
     for epoch in range(args.epoch):
         trainer(args, logger=logger)
@@ -279,13 +279,13 @@ if __name__ == "__main__":
     Saving & loading of the model.
     '''
     parser.add_argument('--save_dir', type=str, default='./saved_models')
-    parser.add_argument('--save_name', type=str, default='bda')
+    parser.add_argument('--save_name', type=str, default='rda')
     parser.add_argument('--resume', action='store_true')
     parser.add_argument('--load_path', type=str, default=None)
     parser.add_argument('--overwrite', action='store_true')
     
     '''
-    Training Configuration of BDA
+    Training Configuration of RDA
     '''
     
     parser.add_argument('--epoch', type=int, default=1)

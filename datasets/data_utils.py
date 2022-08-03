@@ -59,7 +59,7 @@ def split_ssl_data(dataset, data, target, num_labels, num_classes, save_path, in
     nc = num_classes - 1
     file_save_dist = 'dist&index.txt'
     file_path_dist = osp.join(save_path, file_save_dist) if osp.exists(save_path) else file_save_dist    
-    if mismatch=='bda' and gamma!=0:   
+    if mismatch=='rda' and gamma!=0:   
         assert gamma>0  
         data =  data[ulb_idx]
         target =  target[ulb_idx]
@@ -150,7 +150,7 @@ def sample_labeled_data(data, target,
                 lb_idx.extend(idx)
                 lb_data.extend(data[idx])
                 lbs.extend(target[idx])
-        elif mismatch=='bda' and n0!=0:         
+        elif mismatch=='rda' and n0!=0:         
             distri_lb = get_mismatched_imbalance_samples(n0, num_classes, num_labels)
             for c in range(num_classes):
                 idx = np.where(target == c)[0]
