@@ -15,7 +15,7 @@ import os
 import contextlib
 from train_utils import AverageMeter
 
-from .bda_utils import consistency_loss_bda
+from .rda_utils import consistency_loss_rda
 from train_utils import ce_loss
 
 
@@ -39,11 +39,11 @@ class TotalNet(nn.Module):
         f, _, __, y = self.classifier_reverse(f)
         return y
 
-class BDA:
+class RDA:
     def __init__(self, net_builder, num_classes, ema_m, T, lambda_u,\
                  it=0, num_eval_iter=1000, tb_log=None, logger=None, net_name=''):
         
-        super(BDA, self).__init__()
+        super(RDA, self).__init__()
         self.flag = True
 
         self.loader = {}
@@ -103,7 +103,7 @@ class BDA:
     
     def train(self, args, logger=None):
         """
-        Train function of BDA.
+        Train function of RDA.
         From data_loader, it inference training data, computes losses, and update the networks.
         """
 
@@ -190,7 +190,7 @@ class BDA:
                 sup_loss = ce_loss(logits_x_lb, y_lb, reduction='mean')
                 reverse_loss = ce_loss(logits_reverse_separate, res_torch, reduction='mean')
     
-                unsup_loss_ca, unsup_loss_cd = consistency_loss_bda(
+                unsup_loss_ca, unsup_loss_cd = consistency_loss_rda(
                                               logits_x_ulb_w_reverse,
                                               logits_x_ulb_s_reverse,
                                               logits_x_ulb_w, 

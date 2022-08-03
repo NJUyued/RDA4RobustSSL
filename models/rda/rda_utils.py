@@ -21,7 +21,7 @@ class Get_Scalar:
         return self.value
 
 
-def consistency_loss_bda(logits_x_ulb_w_reverse, logits_x_ulb_s_reverse, logits_w, logits_s, distri, distri_reverse, name='ce', T=1.0):
+def consistency_loss_rda(logits_x_ulb_w_reverse, logits_x_ulb_s_reverse, logits_w, logits_s, distri, distri_reverse, name='ce', T=1.0):
     assert name in ['ce', 'L2']
     logits_w = logits_w.detach()
     logits_x_ulb_w_reverse = logits_x_ulb_w_reverse.detach()
