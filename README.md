@@ -1,5 +1,5 @@
 # RDA4RobustSSL
-Code for **[RDA: Reciprocal Distribution Alignment for Robust SSL]([https://arxiv.org/pdf/2208.04610.pdf](https://arxiv.org/abs/2208.04619))**.
+Code for **[RDA: Reciprocal Distribution Alignment for Robust Semi-supervised Learning](https://arxiv.org/abs/2208.04619)**.
 
 Our paper is accepted by ECCV2022 😈. Thanks to users.
 
