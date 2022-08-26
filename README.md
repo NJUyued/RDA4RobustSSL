@@ -111,7 +111,7 @@ python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 ## For STL-10 in DARP's protocol, set --fold -1
 python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name stl10 --dataset stl10 --num_classes 10 --mismatch darp --n0 10 --gpu 0 --fold -1 
 ```
-> STL-10 with $\gamma_l=10$, result of seed 1 (Acc/%): 87.21, weight: [here][stl10-darp]
+STL-10 with $\gamma_l=10$, result of seed 1 (Acc/%): 87.21, weight: [here][stl10-darp]
 
 ***
 ## Resume Training and Evaluation
