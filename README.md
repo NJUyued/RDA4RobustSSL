@@ -41,12 +41,11 @@ By default, the model and `dist&index.txt` will be saved in `\saved_models\@--sa
 python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --num_labels 20  --gpu 0
 ```
 
-CIFAR-10 with 20labels, result of seed 1 (Acc/%): 93.40, weight: [here][cifar10-20]
+CIFAR-10 with 20 labels, result of seed 1 (Acc/%): 93.40, weight: [here][cifar10-20]
 
 ***
 #### Mismatched Distribution
 - Imbalanced $C_x$ and balanced $C_u$ for Tab. 2 in Sec. 5.2
-
 ```
 ## CIFAR-10
 python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --num_labels 40 --mismatch rda --n0 10 --gpu 0
