@@ -27,11 +27,11 @@ python train_rda.py --rank 0 --gpu [0/1/...] @@@other args@@@
 ### Training with Multi-GPUs 
 
 ```
-## for one node
 python train_rda.py --world-size 1 --rank 0 @@@other args@@@
 ```
+
 ## Examples of Running
-By default, the model and `dist&index.txt` will be saved in `\saved_models\@--save_name (yours)`. The file `dist&index.txt` will display   detailed settings of mismatched distribution. This code assumes 1 epoch of training, but the number of iterations is 2\*\*20. For CIFAR-100, you need set `--widen_factor 8` for WRN-28-8 whereas WRN-28-2 is used for CIFAR-10.  Note that you need set `--net_from_name True --net resnet18` for STL-10 and mini-ImageNet. Additionally, WRN-28-2 is used for all experiments under DARP's protocol.
+By default, the model and `dist&index.txt` will be saved in `\saved_models\@--save_name (yours)`. The file `dist&index.txt` will display   detailed settings of mismatched distribution. This code assumes 1 epoch of training, but the number of iterations is 2\*\*20. For CIFAR-100, you need set `--widen_factor 8` for WRN-28-8 whereas WRN-28-2 is used for CIFAR-10.  Note that you need set `--net_from_name True --net resnet18` for STL-10 and mini-ImageNet. Additionally, WRN-28-2 is used for all experiments under DARP's protocol. To better reproduce our experimental results, it is recommended to follow our experimental environment using a single GPU for training.
 
 ### Conventional Setting 
 #### Matched and balanced $C_x$, $C_u$ for Tab. 1 in Sec. 5.1
