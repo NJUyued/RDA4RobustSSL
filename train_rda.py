@@ -17,7 +17,7 @@ from train_utils import TBLog, get_SGD, get_cosine_schedule_with_warmup, get_nod
 from models.rda.rda import RDA
 from datasets.ssl_dataset import SSL_Dataset
 from datasets.data_utils import get_data_loader
-
+os.environ['CUDA_VISIBLE_DEVICES'] = '0,1' 
 def main(args):
     '''
     For (Distributed)DataParallelism,
@@ -166,8 +166,11 @@ def main_worker(gpu, ngpus_per_node, args):
         model.eval_model = model.eval_model.cuda(args.gpu)
               
     else:
-        model.train_model = torch.nn.DataParallel(model.train_model).cuda()
-        model.eval_model = torch.nn.DataParallel(model.eval_model).cuda()
+        model.train_model.feature_extractor = torch.nn.DataParallel(model.train_model.feature_extractor).cuda()
+        model.train_model.classifier_reverse = torch.nn.DataParallel(model.train_model.classifier_reverse).cuda()
+        model.eval_model.feature_extractor = torch.nn.DataParallel(model.eval_model.feature_extractor).cuda()
+        model.eval_model.classifier_reverse = torch.nn.DataParallel(model.eval_model.classifier_reverse).cuda()
+    
     
     logger.info(f"model_arch: {model}")
     logger.info(f"Arguments: {args}")

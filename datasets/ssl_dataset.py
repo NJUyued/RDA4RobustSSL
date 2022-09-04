@@ -58,7 +58,7 @@ def get_transform(mean, std, name, train=True):
     
 class SSL_Dataset:
     """
-    SSL_Dataset class gets dataset (cifar10, cifar100) from torchvision.datasets,
+    SSL_Dataset class gets dataset,
     separates labeled and unlabeled data,
     and return BasicDataset: torch.utils.data.Dataset (see datasets.dataset.py)
     """
@@ -75,7 +75,7 @@ class SSL_Dataset:
                  gamma=0):
         """
         Args
-            name: name of dataset in torchvision.datasets (cifar10, cifar100)
+            name: name of dataset 
             train: True means the dataset is training dataset (default=True)
             num_classes: number of label classes
             data_dir: path of directory, where data is downloaed or stored.

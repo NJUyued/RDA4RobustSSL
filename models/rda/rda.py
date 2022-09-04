@@ -160,16 +160,16 @@ class RDA:
             
             # inference and calculate losses
             with amp_cm():
-                logits, feature = feature_extractor.forward(inputs, ood_test=True) 
+                logits, feature = feature_extractor(inputs, ood_test=True) 
                 logits_x_lb = logits[:num_lb]
                 logits_x_ulb_w, logits_x_ulb_s = logits[num_lb:].chunk(2)
                 pseudo_label = torch.softmax(logits_x_ulb_w, dim=-1)
 
                 # for A
-                feature, logits_reverse, predict_prob = cls_reverse.forward(feature)
+                feature, logits_reverse, predict_prob = cls_reverse(feature)
                 logits_x_ulb_w_reverse, logits_x_ulb_s_reverse = logits_reverse[num_lb:].chunk(2)
 
-                feature_separate, logits_reverse_separate, predict_prob_separate = cls_reverse.forward(feature[:num_lb])
+                feature_separate, logits_reverse_separate, predict_prob_separate = cls_reverse(feature[:num_lb])
                 pseudo_label_cls_reverse = torch.softmax(logits_x_ulb_w_reverse, dim=-1)
 
                 # construct complementary label
@@ -286,7 +286,7 @@ class RDA:
             num_batch = x.shape[0]
             total_num += num_batch
 
-            logits, feature = feature_extractor.forward(x, ood_test=True)         
+            logits, feature = feature_extractor(x, ood_test=True)         
             max_probs, max_idx = torch.max(torch.softmax(logits, dim=-1), dim=-1)
 
             loss = F.cross_entropy(logits, y, reduction='mean')
@@ -312,12 +312,12 @@ class RDA:
             image = image.type(torch.FloatTensor).cuda()
             num_batch = image.shape[0]
   
-            logits, feature = feature_extractor.forward(image, ood_test=True)    
+            logits, feature = feature_extractor(image, ood_test=True)    
             pseudo_label = torch.softmax(logits, dim=-1)
             max_probs, max_idx = torch.max(pseudo_label, dim=-1)  
             mask = max_probs.ge(0) 
 
-            feature, logits_reverse, predict_prob = cls_reverse.forward(feature)
+            feature, logits_reverse, predict_prob = cls_reverse(feature)
             pseudo_label_reverse = torch.softmax(logits_reverse, dim=-1)
 
             maskindex_total = np.where(mask.cpu()==1)[0]
