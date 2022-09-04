@@ -24,24 +24,22 @@ Our paper is accepted by ECCV2022 😈. Thanks to users.
 ```
 python train_rda.py --rank 0 --gpu [0/1/...] @@@other args@@@
 ```
-### Training with Multi-GPUs (DistributedDataParallel)
+### Training with Multi-GPUs 
 
 ```
 ## for one node
-python train_rda.py --world-size 1 --rank 0 --multiprocessing-distributed @@@other args@@@
+python train_rda.py --world-size 1 --rank 0 @@@other args@@@
 ```
 ## Examples of Running
 By default, the model and `dist&index.txt` will be saved in `\saved_models\@--save_name (yours)`. The file `dist&index.txt` will display   detailed settings of mismatched distribution. This code assumes 1 epoch of training, but the number of iterations is 2\*\*20. For CIFAR-100, you need set `--widen_factor 8` for WRN-28-8 whereas WRN-28-2 is used for CIFAR-10.  Note that you need set `--net_from_name True --net resnet18` for STL-10 and mini-ImageNet. Additionally, WRN-28-2 is used for all experiments under DARP's protocol.
 
 ### Conventional Setting 
-- Matched and balanced $C_x$, $C_u$ for Tab. 1 in Sec. 5.1
+#### Matched and balanced $C_x$, $C_u$ for Tab. 1 in Sec. 5.1
+- CIFAR-10, e.g., with 20 labels, result of seed 1 (Acc/%): 93.40, weight: [here][cifar10-20]
 
 ```
-## CIFAR-10
 python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --num_labels 20  --gpu 0
 ```
-
-CIFAR-10 with 20 labels, result of seed 1 (Acc/%): 93.40, weight: [here][cifar10-20]
 
 ***
 ### Mismatched Distribution
