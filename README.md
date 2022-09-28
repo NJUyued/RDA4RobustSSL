@@ -3,6 +3,8 @@ Code for **[RDA: Reciprocal Distribution Alignment for Robust Semi-supervised Le
 
 Our paper is accepted by **ECCV2022** 😈. Thanks to users.
 
+![](/figures/poster.jpg)
+
 ## Requirements
 - matplotlib==3.3.2
 - numpy==1.19.2
