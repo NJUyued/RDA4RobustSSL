@@ -17,7 +17,7 @@ from train_utils import TBLog, get_SGD, get_cosine_schedule_with_warmup, get_nod
 from models.rda.rda import RDA
 from datasets.ssl_dataset import SSL_Dataset
 from datasets.data_utils import get_data_loader
-os.environ['CUDA_VISIBLE_DEVICES'] = '0,1' 
+# os.environ['CUDA_VISIBLE_DEVICES'] = '0,1' 
 def main(args):
     '''
     For (Distributed)DataParallelism,
@@ -105,7 +105,6 @@ def main_worker(gpu, ngpus_per_node, args):
     
     args.bn_momentum = 1.0 - args.ema_m
     _net_builder = net_builder(args.net, 
-                               args.net_from_name,
                                {'depth': args.depth, 
                                 'widen_factor': args.widen_factor,
                                 'leaky_slope': args.leaky_slope,
@@ -119,8 +118,7 @@ def main_worker(gpu, ngpus_per_node, args):
                      args.ulb_loss_ratio,
                      num_eval_iter=args.num_eval_iter,
                      tb_log=tb_log,
-                     logger=logger,
-                     net_name=args.net)
+                     logger=logger)
 
     logger.info(f'Number of Trainable Params: {count_parameters(model.train_model)}')
         
@@ -321,8 +319,7 @@ if __name__ == "__main__":
     '''
     Backbone Net Configurations
     '''
-    parser.add_argument('--net', type=str, default='WideResNet')
-    parser.add_argument('--net_from_name', type=bool, default=False)
+    parser.add_argument('--net', type=str, default='wrn')
     parser.add_argument('--depth', type=int, default=28)
     parser.add_argument('--widen_factor', type=int, default=2)
     parser.add_argument('--leaky_slope', type=float, default=0.1)

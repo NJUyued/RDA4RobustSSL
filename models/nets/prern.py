@@ -1,9 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
 from torch.autograd import Variable
-
 
 def conv3x3(in_planes, out_planes, stride=1):
     return nn.Conv2d(in_planes, out_planes, kernel_size=3, stride=stride, padding=1, bias=False)
@@ -185,3 +183,7 @@ def test():
     net = ResNet18()
     y = net(Variable(torch.randn(1,3,32,32)))
     print(y.size())
+
+class build_prern:   
+    def build(self, num_classes):
+        return ResNet18(num_classes = num_classes) 

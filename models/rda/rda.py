@@ -1,36 +1,19 @@
-from models.nets.net import *
-import models.nets.prern as pnet
-from torch import optim
-import numpy as np
-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torchvision.models as models
-from torch.cuda.amp import autocast, GradScaler
-from random import randint
-from types import MethodType,FunctionType
 import numpy as np
 import os
 import contextlib
-from train_utils import AverageMeter
-
+from models.nets.net import *
 from .rda_utils import consistency_loss_rda
 from train_utils import ce_loss
+from torch.cuda.amp import autocast, GradScaler
 
 
 class TotalNet(nn.Module):
-    def __init__(self, net_builder, num_classes, net_name):
+    def __init__(self, net_builder, num_classes):
         super(TotalNet, self).__init__()
-        if net_name=='resnet18':
-            base_net = net_builder(num_classes=num_classes)    
-            self.feature_extractor = ResNet18(num_classes, base_net)  
-        elif net_name=='cnn13':
-            self.feature_extractor = cnn13(num_classes=num_classes)  
-        elif net_name=='preresnet':
-            self.feature_extractor = pnet.ResNet18(num_classes=num_classes)  
-        else:
-            self.feature_extractor = net_builder(num_classes=num_classes)                  
+        self.feature_extractor = net_builder(num_classes=num_classes)              
         classifier_output_dim = num_classes
         self.classifier_reverse = ReverseCLS(self.feature_extractor.output_num(), classifier_output_dim)
         
@@ -54,8 +37,8 @@ class RDA:
         # network is builded only by num_classes,
         # other configs are covered in main.py
         
-        self.train_model = TotalNet(net_builder, num_classes, net_name) 
-        self.eval_model = TotalNet(net_builder, num_classes, net_name) 
+        self.train_model = TotalNet(net_builder, num_classes) 
+        self.eval_model = TotalNet(net_builder, num_classes) 
         self.num_eval_iter = num_eval_iter
         self.lambda_u = lambda_u
         self.tb_log = tb_log
