@@ -314,12 +314,13 @@ if __name__ == "__main__":
     parser.add_argument('--momentum', type=float, default=0.9)
     parser.add_argument('--weight_decay', type=float, default=5e-4)
     parser.add_argument('--amp', action='store_true', help='use mixed precision training or not')
-    parser.add_argument('--lr_decay', type=str, default='cos', help='cos->cosine decay, none->no decay')
+    parser.add_argument('--lr_decay', type=str, default='cos', help='use {cos,none} for {cosine decay,no decay}')
 
     '''
     Backbone Net Configurations
     '''
-    parser.add_argument('--net', type=str, default='wrn', help='wrn->Wide ResNet, resnet18->ResNet-18, preresnet->PreAct ResNet, cnn13->CNN-13')
+    parser.add_argument('--net', type=str, default='wrn', 
+            help='use {wrn,resnet18,preresnet,cnn13} for {Wide ResNet,ResNet-18,PreAct ResNet,CNN-13}')
     parser.add_argument('--depth', type=int, default=28)
     parser.add_argument('--widen_factor', type=int, default=2)
     parser.add_argument('--leaky_slope', type=float, default=0.1)
