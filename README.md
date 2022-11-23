@@ -27,11 +27,14 @@ python train_rda.py --rank 0 --gpu [0/1/...] @@@other args@@@
 ```
 ### Training with Multi-GPUs (with DataParallel)
 
+- Using DataParallel
+
 ```
 python train_rda.py --world-size 1 --rank 0 @@@other args@@@
 ```
 
-### Training with Multi-GPUs (with DistributedDataParallel and single node)
+- Using DistributedDataParallel with single node
+
 
 ```
 python train_rda.py --world-size 1 --rank 0 --multiprocessing-distributed @@@other args@@@
