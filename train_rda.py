@@ -338,7 +338,7 @@ if __name__ == "__main__":
     parser.add_argument('--fold', type=int, default=0)
     parser.add_argument('--noisy', type=str, default='none', help='type of noisy labels')
     parser.add_argument('--noisy_ratio', type=int, default=0, help='ratio of noisy labels')
-    parser.add_argument('--mismatch', type=str, default='none', help='type of mismatched dist')
+    parser.add_argument('--mismatch', type=str, default='none', choices=['none','rda','darp','darp_reversed'], help='type of mismatched distribution')
     parser.add_argument('--n0', type=int, default=0, help='imbalanced ratio for labeled data')
     parser.add_argument('--gamma', type=int, default=0, help='imbalanced ratio for unlabeled data')
     

@@ -14,8 +14,8 @@ Our paper is accepted by **ECCV2022** 😈. Thanks to users.
 ## How to Train
 ### Important Args
 - `--num_labels` : Amount of labeled data used.  
-- `--mismatch [rda/darp/darp_reversed]` : Select the type of mismatched distribution dataset. `rda` means our protocol for constructing mismatched distribution dataset, which is described in Sec. 4.2; `DARP` means DARP's protocol described in Sec. C.1 of Supplementary Materials; `DARP_reversed` means DARP's protocol for CIFAR-10 with reversed version of mismatched distribution.
-- `--n0` : When `--mismatch rda`, this arg means the imbalanced ratio $N_0$ for labeled data; When `--mismatch DARP/DARP_reversed`, this arg means the imbalanced ratio $\gamma_l$ for labeled data.
+- `--mismatch [none/rda/darp/darp_reversed]` : Select the type of mismatched distribution dataset. `none` means the conventional balanced setting. `rda` means our protocol for constructing mismatched distribution dataset, which is described in Sec. 4.2; `darp` means DARP's protocol described in Sec. C.1 of Supplementary Materials; `darp_reversed` means DARP's protocol for CIFAR-10 with reversed version of mismatched distribution.
+- `--n0` : When `--mismatch rda`, this arg means the imbalanced ratio $N_0$ for labeled data; When `--mismatch [darp/darp_reversed]`, this arg means the imbalanced ratio $\gamma_l$ for labeled data.
 - `--gamma` : When `--mismatch rda`, this arg means the imbalanced ratio $\gamma$ for unlabeled data; When `--mismatch DARP/DARP_reversed`, this arg means the imbalanced ratio $\gamma_u$ for unlabeled data. 
 - `--net` : By default, Wide ResNet (WRN-28-2) are used for experiments. If you want to use other backbones for tarining, set `--net [resnet18/preresnet/cnn13]`. We provide alternatives as follows: ResNet-18, PreAct ResNet and CNN-13.
 - `--dataset [cifar10/cifar100/stl10/miniimage]` and `--data_dir`  : Your dataset name and path. We support four datasets: CIFAR-10, CIFAR-100, STL-10 and mini-ImageNet. When `--dataset stl10`, set `--fold [0/1/2/3/4].`
@@ -45,7 +45,7 @@ By default, the model and `dist&index.txt` will be saved in `\--save_dir\--save_
 
 ### Conventional Setting 
 #### Matched and balanced $C_x$, $C_u$ for Tab. 1 in Sec. 5.1
-- CIFAR-10, e.g., with 20 labels, result of seed 1 (Acc/%): 93.40, weight: [here][cifar10-20]
+- CIFAR-10 with 20 labels | Result of seed 1 (Acc/%): 93.40 | Weight: [here][cifar10-20]
 
 ```
 python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --num_labels 20  --gpu 0
@@ -53,17 +53,17 @@ python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 
 ### Mismatched Distribution
 #### Imbalanced $C_x$ and balanced $C_u$ for Tab. 2 in Sec. 5.2
-- CIFAR-10, e.g., with 40 labels, $N_0=10$, result of seed 1 (Acc/%): 93.06, weight: [here][cifar10-40-10]
+- CIFAR-10 with 40 labels and $N_0=10$ | Result of seed 1 (Acc/%): 93.06 | Weight: [here][cifar10-40-10]
 ```
 python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --num_labels 40 --mismatch rda --n0 10 --gpu 0
 ```
 
-- CIFAR-100, e.g.,  with 400 labels, $N_0=40$, result of seed 1 (Acc/%): 33.54, weight: [here][cifar100-400-40]
+- CIFAR-100 with 400 labels and $N_0=40$ | Result of seed 1 (Acc/%): 33.54 | Weight: [here][cifar100-400-40]
 ```
 python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar100 --dataset cifar100 --num_classes 100 --num_labels 400 --mismatch rda --n0 40 --gpu 0 --widen_factor 8
 ```
 
-- mini-ImageNet, e.g., with 1000 labels, $N_0=40$, result of seed 1 (Acc/%): 43.59, weight: [here][mini-1000-40]
+- mini-ImageNet with 1000 labels and $N_0=40$ | Result of seed 1 (Acc/%): 43.59 | Weight: [here][mini-1000-40]
 ```
 python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name miniimage --dataset miniimage --num_classes 100 --num_labels 1000 --mismatch rda --n0 40 --gpu 0 --net resnet18 
 ```
@@ -71,7 +71,7 @@ python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 ---
 
 #### Imbalanced and mismatched $C_x$, $C_u$ for Tab. 3 in Sec. 5.2
-- CIFAR-10, e.g., with 40 labels, $N_0=10$, $\gamma=5$, result of seed 1 (Acc/%): 80.68, weight: [here][cifar10-40-10-5]
+- CIFAR-10 with 40 labels, $N_0=10$ and $\gamma=5$ | Result of seed 1 (Acc/%): 80.68 | Weight: [here][cifar10-40-10-5]
 
 ```
 python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --num_labels 40 --mismatch rda --n0 10 --gamma 5 --gpu 0
@@ -81,7 +81,7 @@ python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 
 #### Balanced $C_x$ and imbalanced $C_u$ for Tab. 5 in Sec. 5.2
 
-- CIFAR-10, e.g., with 40 labels, $\gamma=200$, result of seed 1 (Acc/%): 45.57, weight: [here][cifar10-40-1-200]
+- CIFAR-10 with 40 labels and $\gamma=200$ | Result of seed 1 (Acc/%): 45.57 | Weight: [here][cifar10-40-1-200]
 ```
 python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --num_labels 40 --mismatch rda --gamma 200 --gpu 0
 ```
@@ -89,20 +89,22 @@ python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 ---
 
 #### DARP's protocol for Tab. 5 in Sec. 5.2.
-- CIFAR-10, e.g., with $\gamma_l=100$, $\gamma_u=1$, result of seed 1 (Acc/%): 93.11, weight: [here][cifar10-darp-1]
+- CIFAR-10 with $\gamma_l=100$ and $\gamma_u=1$ | Result of seed 1 (Acc/%): 93.11 | Weight: [here][cifar10-darp-1]
 
 ```
 python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --mismatch darp --n0 100 --gamma 1 --gpu 0
 ```
 
 
-- CIFAR-10 (reversed), e.g., with $\gamma_l=100$, $\gamma_u=100$ (reversed), result of seed 1 (Acc/%): 78.53, weight: [here][cifar10-darp-re]
+- CIFAR-10 with $\gamma_l=100$ and $\gamma_u=100$ (reversed) | Result of seed 1 (Acc/%): 78.53 | Weight: [here][cifar10-darp-re]
 ```
 python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --mismatch darp_reversed --n0 100 --gamma 100 --gpu 0
 ```
 
 
-- For STL-10 in DARP's protocol, set `--fold -1`, e.g., with $\gamma_l=10$, result of seed 1 (Acc/%): 87.21, weight: [here][stl10-darp]
+- For STL-10 in DARP's protocol, set `--fold -1`. 
+
+    STL-10 with $\gamma_l=10$ | Result of seed 1 (Acc/%): 87.21 | Weight: [here][stl10-darp]
 ```
 python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name stl10 --dataset stl10 --num_classes 10 --mismatch darp --n0 10 --gpu 0 --fold -1 
 ```
