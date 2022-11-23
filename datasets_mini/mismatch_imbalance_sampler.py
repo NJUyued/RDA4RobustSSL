@@ -1,5 +1,5 @@
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 def get_num_per_class(gamma, N0, num_cls, cls_index):
     tmp_amount =  N0*(gamma** (-cls_index /num_cls))
@@ -94,32 +94,32 @@ def get_mismatched_imbalance_samples(N0, num_cls, bounded_num):
     return samples_dist
 
 
-def test(test_n0, test_num_cls, test_bound, filename):
-    cls_index = range(0, test_num_cls)
-    cls_dist = get_mismatched_imbalance_samples(test_n0, test_num_cls, test_bound)
+# def test(test_n0, test_num_cls, test_bound, filename):
+#     cls_index = range(0, test_num_cls)
+#     cls_dist = get_mismatched_imbalance_samples(test_n0, test_num_cls, test_bound)
 
-    print(cls_dist)
+#     print(cls_dist)
 
-    f_size = (8,6)
-    ff_name = "monospace" # Times New Roman
-    myfont = {'family': ff_name, 'weight': 'normal',
-              'color':  'black', 'size': 15,}
+#     f_size = (8,6)
+#     ff_name = "monospace" # Times New Roman
+#     myfont = {'family': ff_name, 'weight': 'normal',
+#               'color':  'black', 'size': 15,}
 
-    plt.figure(figsize=f_size)
-    plt.bar(cls_index, cls_dist, color = '#297083', align = 'center')
-    plt.xlabel("Class Index", fontdict=myfont)
-    plt.ylabel("Number", fontdict=myfont)
-    plt.title(f"Class:{test_num_cls} - Total:{test_bound}/{sum(cls_dist)} - N0:{test_n0}")
-    plt.xlim([-1, test_num_cls])
-    plt.yticks(fontproperties=ff_name, size = 14)
-    plt.xticks(range(0, 10), fontproperties=ff_name,size = 14)
-    plt.savefig(f'{filename}-{test_n0}-{test_num_cls}-{test_bound}.jpg')
-    plt.close()
+#     plt.figure(figsize=f_size)
+#     plt.bar(cls_index, cls_dist, color = '#297083', align = 'center')
+#     plt.xlabel("Class Index", fontdict=myfont)
+#     plt.ylabel("Number", fontdict=myfont)
+#     plt.title(f"Class:{test_num_cls} - Total:{test_bound}/{sum(cls_dist)} - N0:{test_n0}")
+#     plt.xlim([-1, test_num_cls])
+#     plt.yticks(fontproperties=ff_name, size = 14)
+#     plt.xticks(range(0, 10), fontproperties=ff_name,size = 14)
+#     plt.savefig(f'{filename}-{test_n0}-{test_num_cls}-{test_bound}.jpg')
+#     plt.close()
 
-if __name__ == "__main__":
-    test_n0 = 10
-    test_num_cls = 10
-    test_bound = 40
-    filename="test"
-    test(test_n0, test_num_cls, test_bound, filename)
+# if __name__ == "__main__":
+#     test_n0 = 10
+#     test_num_cls = 10
+#     test_bound = 40
+#     filename="test"
+#     test(test_n0, test_num_cls, test_bound, filename)
     

@@ -6,7 +6,6 @@ Our paper is accepted by **ECCV2022** 😈. Thanks to users.
 ![](/figures/poster.jpg)
 
 ## Requirements
-- matplotlib==3.3.2
 - numpy==1.19.2
 - pandas==1.1.5
 - Pillow==9.0.1
@@ -18,22 +17,28 @@ Our paper is accepted by **ECCV2022** 😈. Thanks to users.
 - `--mismatch [rda/darp/darp_reversed]` : Select the type of mismatched distribution dataset. `rda` means our protocol for constructing mismatched distribution dataset, which is described in Sec. 4.2; `DARP` means DARP's protocol described in Sec. C.1 of Supplementary Materials; `DARP_reversed` means DARP's protocol for CIFAR-10 with reversed version of mismatched distribution.
 - `--n0` : When `--mismatch rda`, this arg means the imbalanced ratio $N_0$ for labeled data; When `--mismatch DARP/DARP_reversed`, this arg means the imbalanced ratio $\gamma_l$ for labeled data.
 - `--gamma` : When `--mismatch rda`, this arg means the imbalanced ratio $\gamma$ for unlabeled data; When `--mismatch DARP/DARP_reversed`, this arg means the imbalanced ratio $\gamma_u$ for unlabeled data. 
-- `--net` : By default, wide resnet (WRN-28-2) are used for experiments. If you want to use other backbones for tarining, set `--net [resnet18/preresnet/cnn13]`. We provide alternatives as follows: ResNet-18, PreAct ResNet and CNN-13.
+- `--net` : By default, Wide ResNet (WRN-28-2) are used for experiments. If you want to use other backbones for tarining, set `--net [resnet18/preresnet/cnn13]`. We provide alternatives as follows: ResNet-18, PreAct ResNet and CNN-13.
 - `--dataset [cifar10/cifar100/stl10/miniimage]` and `--data_dir`  : Your dataset name and path. We support four datasets: CIFAR-10, CIFAR-100, STL-10 and mini-ImageNet. When `--dataset stl10`, set `--fold [0/1/2/3/4].`
-- `--num_eval_iter` : After how many iterations, we evaluate the model. Note that although we show the accuracy of pseudo-labels on unlabeled data in the evaluation, this is only to show the training process. We did not use any information about labels for unlabeled data in the training. Additionally, when you train model on STL-10, the pseudo-label accuracy will not be displayed normally, because we don't have ground-truth of unlabeled data.
+- `--num_eval_iter` : After how many iterations, we evaluate the model. Note that although we show the accuracy of pseudo-labels on unlabeled data in the evaluation, this is only to show the training process. We did not use any information about labels for unlabeled data in the training. Additionally, when you train model on STL-10, the pseudo-label accuracy will not be displayed normally, because we don't have the ground-truth of unlabeled data.
 ### Training with Single GPU
 
 ```
 python train_rda.py --rank 0 --gpu [0/1/...] @@@other args@@@
 ```
-### Training with Multi-GPUs 
+### Training with Multi-GPUs (with DataParallel)
 
 ```
 python train_rda.py --world-size 1 --rank 0 @@@other args@@@
 ```
 
+### Training with Multi-GPUs (with DistributedDataParallel and single node)
+
+```
+python train_rda.py --world-size 1 --rank 0 --multiprocessing-distributed @@@other args@@@
+```
+
 ## Examples of Running
-By default, the model and `dist&index.txt` will be saved in `\saved_models\@--save_name (yours)`. The file `dist&index.txt` will display   detailed settings of mismatched distribution. This code assumes 1 epoch of training, but the number of iterations is 2\*\*20. For CIFAR-100, you need set `--widen_factor 8` for WRN-28-8 whereas WRN-28-2 is used for CIFAR-10.  Note that you need set `--net resnet18` for STL-10 and mini-ImageNet. Additionally, WRN-28-2 is used for all experiments under DARP's protocol. To better reproduce our experimental results, it is recommended to follow our experimental environment using a single GPU for training.
+By default, the model and `dist&index.txt` will be saved in `\--save_dir\--save_name`. The file `dist&index.txt` will display   detailed settings of mismatched distribution. This code assumes 1 epoch of training, but the number of iterations is 2\*\*20. For CIFAR-100, you need set `--widen_factor 8` for WRN-28-8 whereas WRN-28-2 is used for CIFAR-10.  Note that you need set `--net resnet18` for STL-10 and mini-ImageNet. Additionally, WRN-28-2 is used for all experiments under DARP's protocol. To better reproduce our experimental results, it is recommended to follow our experimental environment using a single GPU for training.
 
 ### Conventional Setting 
 #### Matched and balanced $C_x$, $C_u$ for Tab. 1 in Sec. 5.1
@@ -101,7 +106,7 @@ python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 
 
 ## Resume Training and Evaluation
-If you restart the training, please use `--resume --load_path @your_path`. Each time you start training, the evaluation results of the current model will be displayed. If you want to evaluate a model, use its checkpoints to resume training.
+If you restart the training, please use `--resume --load_path @your path to checkpoint@`. Each time you start training, the evaluation results of the current model will be displayed. If you want to evaluate a model, use its checkpoints to resume training.
 
 ## Results (e.g. seed=1)
 
