@@ -25,7 +25,7 @@ Our paper is accepted by **ECCV2022** 😈. Thanks to users.
 ```
 python train_rda.py --rank 0 --gpu [0/1/...] @@@other args@@@
 ```
-### Training with Multi-GPUs (with DataParallel)
+### Training with Multi-GPUs
 
 - Using DataParallel
 
