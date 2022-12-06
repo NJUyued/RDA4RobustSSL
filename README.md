@@ -8,7 +8,7 @@ Our paper is accepted by **ECCV2022** 🎉🎉. Thanks to users.
 
 <div align=center>
 
-<img width="1000px" src="/figures/framework.jpg"> 
+<img width="750px" src="/figures/framework.jpg"> 
 
 [arXiv](https://arxiv.org/abs/2208.04619) | [Paper](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136900527.pdf) | [Poster](/figures/poster.jpg) | [Code](https://github.com/NJUyued/RDA4RobustSSL/archive/refs/heads/master.zip)
  
