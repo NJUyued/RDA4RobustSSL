@@ -2,7 +2,7 @@
 
 Code for ***RDA: Reciprocal Distribution Alignment for Robust Semi-supervised Learning***.
 
-Authors: Duan Yue, Qi Lei, Wang Lei, Zhou Luping and Shi Yinghuan.
+Authors: Yue Duan, Lei Qi, Lei Wang, Luping Zhou and Yinghuan Shi.
 
 Our paper is accepted by **ECCV2022** 🎉🎉. Thanks to users.
 
