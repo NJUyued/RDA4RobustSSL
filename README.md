@@ -1,9 +1,22 @@
 # RDA4RobustSSL
-Code for **[RDA: Reciprocal Distribution Alignment for Robust Semi-supervised Learning](https://arxiv.org/abs/2208.04619)**.
 
-Our paper is accepted by **ECCV2022** 😈. Thanks to users.
+Code for ***RDA: Reciprocal Distribution Alignment for Robust Semi-supervised Learning***.
 
-![](/figures/poster.jpg)
+Authors: Duan Yue, Qi Lei, Wang Lei, Zhou Luping and Shi Yinghuan.
+
+Our paper is accepted by **ECCV2022** 🎉🎉. Thanks to users.
+
+<div align=center>
+
+<img width="1000px" src="/figures/framework.jpg"> 
+
+[arXiv](https://arxiv.org/abs/2208.04619) | [Paper](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136900527.pdf) | [Poster](/figures/poster.jpg) | [Code](https://github.com/NJUyued/RDA4RobustSSL/archive/refs/heads/master.zip)
+ 
+</div>
+
+## Introduction
+
+**Reciprocal Distribution Alignment (RDA) aims to address semi-supervised learning (SSL), which is a hyperparameter-free framework that is independent of confidence threshold and works with both the matched (conventionally) and the mismatched class distributions.** Distribution mismatch is an often overlooked but more general SSL scenario where the labeled and the unlabeled data do not fall into the identical class distribution. This may lead to the model not exploiting the labeled data reliably and drastically degrade the performance of SSL methods, which could not be rescued by the traditional distribution alignment. Our approach achieves promising performance in SSL under a variety of scenarios of mismatched distributions, as well as the conventional matched SSL setting.
 
 ## Requirements
 - numpy==1.19.2
@@ -115,6 +128,8 @@ If you restart the training, please use `--resume --load_path @your path to chec
 
 ## Results (e.g. seed=1)
 
+<div align=center>
+
 | Dateset | Labels | $N_0$ / $\gamma_l$ |$\gamma$ / $\gamma_u$|Acc (%)|Note|
 | :-----:| :----: | :----: |:----: |:----: |:----: |
 |CIFAR-10 | 20 | - |- |93.40 |Conventional setting|
@@ -144,12 +159,26 @@ If you restart the training, please use `--resume --load_path @your path to chec
 | | 1000| 80 |- |38.16 ||
 | | 1000| 40 |10 |25.91 |Mismatched imbalanced $C_x$ and $C_u$|
 
+</div>
 
+## Citation
+Please cite our paper if you find RDA useful:
+
+```
+@inproceedings{duan2022rda,
+  title={RDA: Reciprocal Distribution Alignment for Robust Semi-supervised Learning},
+  author={Duan, Yue and Qi, Lei and Wang, Lei and Zhou, Luping and Shi, Yinghuan},
+  booktitle={European Conference on Computer Vision},
+  pages={533--549},
+  year={2022},
+  organization={Springer}
+}
+```
 
 ## Acknowledgement
-Our code is based on open source code: [LeeDoYup/FixMatch-pytorch][1].
+Our code is based on open source code: [LeeDoYup/FixMatch-pytorch][ack].
 
-[1]: https://github.com/LeeDoYup/FixMatch-pytorch
+[ack]: https://github.com/LeeDoYup/FixMatch-pytorch
 [cifar10-20]: https://1drv.ms/u/s!Ao848hI985sshjSqXrH4QoG1JgCH?e=qiGZe3
 [cifar10-40-10]: https://1drv.ms/u/s!Ao848hI985sshiRA2Wm2F0IuG_hv?e=jh2sOg
 [cifar10-40-10-5]: https://1drv.ms/u/s!Ao848hI985sshiZTF8hAq51b01n1?e=OTPuMd
