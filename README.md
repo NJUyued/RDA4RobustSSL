@@ -33,7 +33,7 @@ This repo is the official Pytorch implementation of our paper:
 ## How to Train
 ### Important Args
 - `--num_labels` : Amount of labeled data used.  
-- `--mismatch [none/rda/darp/darp_reversed]` : Select the type of mismatched distribution dataset. `none` means the conventional balanced setting. `rda` means our protocol for constructing mismatched distribution dataset, which is described in Sec. 4.2; `darp` means DARP's protocol described in Sec. C.1 of Supplementary Materials; `darp_reversed` means DARP's protocol for CIFAR-10 with reversed version of mismatched distribution.
+- `--mismatch [none/rda/darp/darp_reversed]` : Select the type of mismatched distributions. `none` means the conventional balanced setting. `rda` means our protocol for constructing dataset with mismatched distributions, which is described in Sec. 4.2; `darp` means DARP's protocol described in Sec. C.1 of Supplementary Materials; `darp_reversed` means DARP's protocol for CIFAR-10 with reversed version of mismatched distributions.
 - `--n0` : When `--mismatch rda`, this arg means the imbalanced ratio $N_0$ for labeled data; When `--mismatch [darp/darp_reversed]`, this arg means the imbalanced ratio $\gamma_l$ for labeled data.
 - `--gamma` : When `--mismatch rda`, this arg means the imbalanced ratio $\gamma$ for unlabeled data; When `--mismatch DARP/DARP_reversed`, this arg means the imbalanced ratio $\gamma_u$ for unlabeled data. 
 - `--net` : By default, Wide ResNet (WRN-28-2) are used for experiments. If you want to use other backbones for tarining, set `--net [resnet18/preresnet/cnn13]`. We provide alternatives as follows: ResNet-18, PreAct ResNet and CNN-13.
@@ -41,8 +41,10 @@ This repo is the official Pytorch implementation of our paper:
 - `--num_eval_iter` : After how many iterations, we evaluate the model. Note that although we show the accuracy of pseudo-labels on unlabeled data in the evaluation, this is only to show the training process. We did not use any information about labels for unlabeled data in the training. Additionally, when you train model on STL-10, the pseudo-label accuracy will not be displayed normally, because we don't have the ground-truth of unlabeled data.
 ### Training with Single GPU
 
+To better reproduce our experimental results, it is recommended to follow our experimental environment using a single GPU for training.
+
 ```
-python train_rda.py --rank 0 --gpu [0/1/...] @@@other args@@@
+python train_rda.py --world-size 1 --rank 0 --gpu [0/1/...] @@@other args@@@
 ```
 ### Training with Multi-GPUs
 
@@ -60,7 +62,7 @@ python train_rda.py --world-size 1 --rank 0 --multiprocessing-distributed @@@oth
 ```
 
 ## Examples of Running
-By default, the model and `dist&index.txt` will be saved in `\--save_dir\--save_name`. The file `dist&index.txt` will display   detailed settings of mismatched distribution. This code assumes 1 epoch of training, but the number of iterations is 2\*\*20. For CIFAR-100, you need set `--widen_factor 8` for WRN-28-8 whereas WRN-28-2 is used for CIFAR-10.  Note that you need set `--net resnet18` for STL-10 and mini-ImageNet. Additionally, WRN-28-2 is used for all experiments under DARP's protocol. To better reproduce our experimental results, it is recommended to follow our experimental environment using a single GPU for training.
+By default, the model and `dist&index.txt` will be saved in `\--save_dir\--save_name`. The file `dist&index.txt` will display detailed settings of mismatched distributions. This code assumes 1 epoch of training, but the number of iterations is 2\*\*20. For CIFAR-100, you need set `--widen_factor 8` for WRN-28-8 whereas WRN-28-2 is used for CIFAR-10.  Note that you need set `--net resnet18` for STL-10 and mini-ImageNet. Additionally, WRN-28-2 is used for all experiments under DARP's protocol.
 
 ### Conventional Setting 
 #### Matched and balanced $C_x$, $C_u$ for Tab. 1 in Sec. 5.1
@@ -70,7 +72,7 @@ By default, the model and `dist&index.txt` will be saved in `\--save_dir\--save_
 python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --num_labels 20  --gpu 0
 ```
 
-### Mismatched Distribution
+### Mismatched Distributions
 #### Imbalanced $C_x$ and balanced $C_u$ for Tab. 2 in Sec. 5.2
 - CIFAR-10 with 40 labels and $N_0=10$ | Result of seed 1 (Acc/%): 93.06 | Weight: [here][cifar10-40-10]
 ```
