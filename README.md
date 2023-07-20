@@ -10,19 +10,20 @@ This repo is the official Pytorch implementation of our paper:
  - Latest news:
      - Our paper is accepted by **European Conference on Computer Vision (ECCV) 2022** 🎉🎉. Thanks to users. 
  - Related works:
-     - 🆕 **[Most relevant]** Interested in more scenarios of SSL with mismatched distributions? 👉 Check out our ICCV'23 paper **PRG** [[arXiv]() | [Repo](https://github.com/NJUyued/RDA4RobustSSL)].
+     - 🆕 **[MOST RElEVANT 📍]** Interested in more scenarios of SSL with mismatched distributions? 👉 Check out our ICCV'23 paper **PRG** [[arXiv]() | [Repo](https://github.com/NJUyued/RDA4RobustSSL)].
      - Interested in the conventional SSL or more application of complementary label in SSL? 👉 Check out our TNNLS paper **MutexMatch** [[arXiv](https://arxiv.org/abs/2203.14316) | [Repo](https://github.com/NJUyued/MutexMatch4SSL/)].
+
+
+## Introduction
+
+**Reciprocal Distribution Alignment (RDA) is a semi-supervised learning (SSL) framework working with both the matched (conventionally) and the mismatched class distributions.** Distribution mismatch is an often overlooked but more general SSL scenario where the labeled and the unlabeled data do not fall into the identical class distribution. This may lead to the model not exploiting the labeled data reliably and drastically degrade the performance of SSL methods, which could not be rescued by the traditional distribution alignment. RDA achieves promising performance in SSL under a variety of scenarios of mismatched distributions, as well as the conventional matched SSL setting.
+
 
 <div align=center>
 
 <img width="750px" src="/figures/framework.jpg"> 
  
 </div>
-
-
-## Introduction
-
-**Reciprocal Distribution Alignment (RDA) is a semi-supervised learning (SSL) framework working with both the matched (conventionally) and the mismatched class distributions.** Distribution mismatch is an often overlooked but more general SSL scenario where the labeled and the unlabeled data do not fall into the identical class distribution. This may lead to the model not exploiting the labeled data reliably and drastically degrade the performance of SSL methods, which could not be rescued by the traditional distribution alignment. RDA achieves promising performance in SSL under a variety of scenarios of mismatched distributions, as well as the conventional matched SSL setting.
 
 ## Requirements
 - numpy==1.19.2
@@ -89,7 +90,7 @@ python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name miniimage --dataset miniimage --num_classes 100 --num_labels 1000 --mismatch rda --n0 40 --gpu 0 --net resnet18 
 ```
 
----
+
 
 #### Imbalanced and mismatched $C_x$, $C_u$ for Tab. 3 in Sec. 5.2
 - CIFAR-10 with 40 labels, $N_0=10$ and $\gamma=5$ | Result of seed 1 (Acc/%): 80.68 | Weight: [here][cifar10-40-10-5]
@@ -98,7 +99,7 @@ python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --num_labels 40 --mismatch rda --n0 10 --gamma 5 --gpu 0
 ```
 
----
+
 
 #### Balanced $C_x$ and imbalanced $C_u$ for Tab. 5 in Sec. 5.2
 
@@ -107,9 +108,9 @@ python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_iter 1000 --overwrite --save_name cifar10 --dataset cifar10 --num_classes 10 --num_labels 40 --mismatch rda --gamma 200 --gpu 0
 ```
 
----
 
-#### DARP's protocol for Tab. 5 in Sec. 5.2.
+
+#### DARP's protocol for Tab. 5 in Sec. 5.2
 - CIFAR-10 with $\gamma_l=100$ and $\gamma_u=1$ | Result of seed 1 (Acc/%): 93.11 | Weight: [here][cifar10-darp-1]
 
 ```
@@ -132,14 +133,14 @@ python train_rda.py --world-size 1 --rank 0 --lr_decay cos --seed 1 --num_eval_i
 
 
 ## Resume Training and Evaluation
-If you restart the training, please use `--resume --load_path @your path to checkpoint@`. Each time you start training, the evaluation results of the current model will be displayed. If you want to evaluate a model, use its checkpoints to resume training.
+If you restart the training, please use `--resume --load_path @your_path_to_checkpoint`. Each time you start training, the evaluation results of the current model will be displayed. If you want to evaluate a model, use its checkpoints to resume training.
 
 ## Results (e.g. seed=1)
 
 <div align=center>
 
 | Dateset | Labels | $N_0$ / $\gamma_l$ |$\gamma$ / $\gamma_u$|Acc (%)|Note|
-| :-----:| :----: | :----: |:----: |:----: |:----: |
+| :--:| :-: | :-: |:-: |:-: |:-: |
 |CIFAR-10 | 20 | - |- |93.40 |Conventional setting|
 | | 40 | - |- |94.13 ||
 | | 80 | - |- |94.24 ||
