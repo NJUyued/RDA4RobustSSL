@@ -6,7 +6,7 @@ This repo is the official Pytorch implementation of our paper:
 ***Authors**: Yue Duan, Lei Qi, Lei Wang, Luping Zhou and Yinghuan Shi*
 
  
- - Quick links: [[arXiv](https://arxiv.org/abs/2208.04619) | [Published paper](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136900527.pdf) | [Poster](/figures/poster.jpg) | [Code download](https://github.com/NJUyued/RDA4RobustSSL/archive/refs/heads/master.zip)]  
+ - Quick links: [[arXiv](https://arxiv.org/abs/2208.04619) | [Published paper](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136900527.pdf) | [Poster/Slides/Video](https://github.com/NJUyued/Posters-Slides-Videos/tree/master/RDA-ECCV'22) | [Code download](https://github.com/NJUyued/RDA4RobustSSL/archive/refs/heads/master.zip)]  
  - Latest news:
      - Our paper is accepted by **European Conference on Computer Vision (ECCV) 2022** 🎉🎉. Thanks to users. 
  - Related works:
