@@ -10,7 +10,8 @@ This repo is the official Pytorch implementation of our paper:
  - Latest news:
      - Our paper is accepted by **European Conference on Computer Vision (ECCV) 2022** 🎉🎉. Thanks to users. 
  - Related works:
-     - 🆕 📍 **[MOST RELEVANT]** Interested in more scenarios of SSL with mismatched distributions? 👉 Check out our ICCV'23 paper **PRG** [[arXiv]() | [Repo](https://github.com/NJUyued/PRG4SSL-MNAR)].
+     - 📍 **[MOST RELEVANT]** Interested in more scenarios of SSL with mismatched distributions? 👉 Check out our ICCV'23 paper **PRG** [[arXiv]() | [Repo](https://github.com/NJUyued/PRG4SSL-MNAR)].
+     - 🆕 **[LATEST]** Interested in the SSL in fine-grained visual classification (SS-FGVC)? 👉 Check out our AAAI'24 paper **SoC** [[arXiv](https://arxiv.org/abs/2312.12237) | [Repo](https://github.com/NJUyued/SoC4SS-FGVC/)].
      - Interested in the conventional SSL or more application of complementary label in SSL? 👉 Check out our TNNLS paper **MutexMatch** [[arXiv](https://arxiv.org/abs/2203.14316) | [Repo](https://github.com/NJUyued/MutexMatch4SSL/)].
 
 
