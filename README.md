@@ -6,13 +6,13 @@ This repo is the official Pytorch implementation of our paper:
 ***Authors**: **Yue Duan**, Lei Qi, Lei Wang, Luping Zhou and Yinghuan Shi*
 
  
- - Quick links: [[arXiv](https://arxiv.org/abs/2208.04619) | [Published Paper](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136900527.pdf) | [Poster/Slides/Video](https://github.com/NJUyued/Posters-Slides-Videos/tree/master/RDA-ECCV'22) | [Code Download](https://github.com/NJUyued/RDA4RobustSSL/archive/refs/heads/master.zip)]  
+ - Quick links: [[Paper-arXiv](https://arxiv.org/pdf/2208.04619v2) | [Paper-Published](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136900527.pdf) | [Poster/Slides/Video](https://github.com/NJUyued/Posters-Slides-Videos/tree/master/RDA-ECCV'22) | [Code Download](https://github.com/NJUyued/RDA4RobustSSL/archive/refs/heads/master.zip)]  
  - Latest news:
      - Our paper is accepted by **European Conference on Computer Vision (ECCV) 2022** 🎉🎉. Thanks to users. 
  - Related works:
-     - 📍 **[MOST RELEVANT]** Interested in more scenarios of SSL with mismatched distributions? 👉 Check out our ICCV'23 paper **PRG** [[arXiv](https://arxiv.org/abs/2308.08872) | [Repo](https://github.com/NJUyued/PRG4SSL-MNAR)].
-     - 🆕 **[LATEST]** Interested in the SSL in fine-grained visual classification (SS-FGVC)? 👉 Check out our AAAI'24 paper **SoC** [[arXiv](https://arxiv.org/abs/2312.12237) | [Repo](https://github.com/NJUyued/SoC4SS-FGVC/)].
-     - Interested in the conventional SSL or more application of complementary label in SSL? 👉 Check out our TNNLS paper **MutexMatch** [[arXiv](https://arxiv.org/abs/2203.14316) | [Repo](https://github.com/NJUyued/MutexMatch4SSL/)].
+     - 📍 **[MOST RELEVANT]** Interested in more scenarios of SSL with mismatched distributions? 👉 Check out our ICCV'23 paper **PRG** [[Paper-arXiv](https://arxiv.org/pdf/2308.08872) | [Code](https://github.com/NJUyued/PRG4SSL-MNAR)].
+     - 🆕 **[LATEST]** Interested in the SSL in fine-grained visual classification (SS-FGVC)? 👉 Check out our AAAI'24 paper **SoC** [[Paper-arXiv](https://arxiv.org/pdf/2312.12237) | [Code](https://github.com/NJUyued/SoC4SS-FGVC/)].
+     - Interested in the conventional SSL or more application of complementary label in SSL? 👉 Check out our TNNLS paper **MutexMatch** [[Paper-arXiv](https://arxiv.org/pdf/2203.14316) | [Code](https://github.com/NJUyued/MutexMatch4SSL/)].
 
 
 ## Introduction
