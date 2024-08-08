@@ -8,7 +8,7 @@ This repo is the official Pytorch implementation of our paper:
  
  - 🔗 Quick links: [[PDF](https://arxiv.org/pdf/2208.04619v2)/[Abs](https://arxiv.org/abs/2208.04619v2)-arXiv | [PDF](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136900527.pdf)/[Abs](https://link.springer.com/chapter/10.1007/978-3-031-20056-4_31)-Published | [Poster/Slides/Video](https://github.com/NJUyued/Posters-Slides-Videos/tree/master/RDA-ECCV'22) | [Code Download](https://github.com/NJUyued/RDA4RobustSSL/archive/refs/heads/master.zip)]  
  - 📰 Latest news:
-     - [Slides and video](https://github.com/NJUyued/Posters-Slides-Videos/tree/master/RDA-ECCV'22) explaining our paper are now online!
+     - **[Slides and video](https://github.com/NJUyued/Posters-Slides-Videos/tree/master/RDA-ECCV'22) explaining our paper are now online!**
      - Our paper is accepted by **European Conference on Computer Vision (ECCV) 2022** 🎉🎉. Thanks to users. 
  - 📑 Related works:
      - 📍 **[MOST RELEVANT]** Interested in more scenarios of **SSL with mismatched distributions**? 👉 Check out our ICCV'23 paper **PRG** [[PDF-arXiv](https://arxiv.org/pdf/2308.08872) | [Code](https://github.com/NJUyued/PRG4SSL-MNAR)].
